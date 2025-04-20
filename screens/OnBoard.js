@@ -5,6 +5,7 @@ export default function OnBoard() {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Welcome to OnBoard Screen!</Text>
+      <Image source={require("./assets/DB-Welcome.png")} style={styles.img} />
     </View>
   );
 }
@@ -19,5 +20,9 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 24,
     fontWeight: 'bold',
+  },
+  img: {
+    width: 300,
+    height: 300,
   },
 });
