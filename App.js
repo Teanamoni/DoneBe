@@ -2,7 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, Image, TouchableOpacity } from 'react-native';
-import OnBoard from './screens/OnBoard';
+import OnBoard from './screens/onBoard';
 
 const Stack = createNativeStackNavigator();
 
