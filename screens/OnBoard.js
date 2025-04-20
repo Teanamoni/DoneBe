@@ -52,7 +52,8 @@ const styles = StyleSheet.create({
   },
   dotsContainer: {
     flexDirection: 'row',
-    marginTop: height * 0.3, // mengatur dots agar lebih ke bawah
+    position: 'absolute',
+    bottom: 50, // Sama persis dengan OnBoardScreen.js
   },
   dot: {
     width: 10,
