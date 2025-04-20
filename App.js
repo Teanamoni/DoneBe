@@ -2,7 +2,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, Image, TouchableOpacity } from 'react-native';
-import OnBoard from './screens/onBoard';
+import OnBoardScreen from './screens/OnBoardScreen'; // Ganti dari OnBoard
+// Pastikan kamu sudah punya file OnBoardScreen.js seperti yang sebelumnya aku kasih
 
 const Stack = createNativeStackNavigator();
 
@@ -11,7 +12,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Home" component={DoneBeeScreen} />
-        <Stack.Screen name="OnBoard" component={OnBoard} />
+        <Stack.Screen name="OnBoard" component={OnBoardScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -23,6 +24,7 @@ function DoneBeeScreen({ navigation }) {
       <TouchableOpacity onPress={() => navigation.navigate('OnBoard')}>
         <Image source={require("./assets/DoneBee.png")} style={styles.img} />
       </TouchableOpacity>
+      <StatusBar style="auto" />
     </View>
   );
 }
