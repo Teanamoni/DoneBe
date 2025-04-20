@@ -21,23 +21,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   img: {
-    width: 200,
-    height: 200,
+    width: 350,
+    height: 350,
     resizeMode: 'contain',
     marginBottom: 10,
-    marginTop: 350
+    marginTop: 15
   },
   title: {
-    fontSize: 22,
+    fontSize: 25,
     fontWeight: 'bold',
     color: '#2B2B2B',
     marginBottom: 20,
   },
   subtitle: {
-    fontSize: 14,
+    fontSize: 18,
     color: '#555',
     fontStyle: 'italic',
     textAlign: 'center',
-    marginBottom: 30,
+    marginBottom: 20,
   },
 });
