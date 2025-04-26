@@ -6,29 +6,11 @@ import { StyleSheet, View, Image, TouchableOpacity } from 'react-native';
 // Import screens
 import OnBoardScreen from './screens/OnBoardScreen';
 import Lobby from './screens/Lobby';
+import NoteDetail from './screens/NoteDetail'; // ⬅️ Import tambahan
 
 const Stack = createNativeStackNavigator();
 
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Home"
-        screenOptions={{ headerShown: false }}
-      >
-        {/* Tampilan awal saat buka aplikasi */}
-        <Stack.Screen name="Home" component={DoneBeeScreen} />
-        
-        {/* Onboarding screen */}
-        <Stack.Screen name="OnBoard" component={OnBoardScreen} />
-
-        {/* Setelah onboarding selesai, user masuk ke Lobby */}
-        <Stack.Screen name="Lobby" component={Lobby} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
-
+// Pindahkan ke atas dulu
 function DoneBeeScreen({ navigation }) {
   return (
     <View style={styles.container}>
@@ -38,6 +20,22 @@ function DoneBeeScreen({ navigation }) {
       </TouchableOpacity>
       <StatusBar style="auto" />
     </View>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{ headerShown: false }}
+      >
+        <Stack.Screen name="Home" component={DoneBeeScreen} />
+        <Stack.Screen name="OnBoard" component={OnBoardScreen} />
+        <Stack.Screen name="Lobby" component={Lobby} />
+        <Stack.Screen name="NoteDetail" component={NoteDetail} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 

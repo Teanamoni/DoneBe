@@ -1,25 +1,45 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, Modal, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Modal, TextInput, FlatList } from 'react-native';
 
 export default function Lobby({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [title, setTitle] = useState('');
+  const [notes, setNotes] = useState([]);
 
   const handleAddPress = () => {
-    setModalVisible(true); // Munculkan modal saat tombol tambah ditekan
+    setModalVisible(true);
   };
 
   const handleCreate = () => {
-    console.log('Judul dibuat:', title);
-    setModalVisible(false);
-    setTitle(''); // Reset setelah buat
-    // Bisa sekalian navigasi atau simpan data
+    if (title.trim() !== '') {
+      const newNote = { id: Date.now().toString(), title: title, content: '' }; // tambah content kosong
+      setNotes([...notes, newNote]);
+      setModalVisible(false);
+      setTitle('');
+    }
   };
 
   const handleCancel = () => {
     setModalVisible(false);
     setTitle('');
   };
+
+  const handleNotePress = (note) => {
+    navigation.navigate('NoteDetail', {
+      note,
+      updateNote: (updatedNote) => {
+        setNotes((prevNotes) =>
+          prevNotes.map((n) => (n.id === updatedNote.id ? updatedNote : n))
+        );
+      },
+    });
+  };
+
+  const renderItem = ({ item }) => (
+    <TouchableOpacity style={styles.noteCard} onPress={() => handleNotePress(item)}>
+      <Text style={styles.noteTitle}>{item.title}</Text>
+    </TouchableOpacity>
+  );
 
   return (
     <View style={styles.container}>
@@ -28,16 +48,20 @@ export default function Lobby({ navigation }) {
         lebih dekat ke tujuan
       </Text>
 
-      <Image
-        source={require('../assets/DB-Welcome.png')}
-        style={styles.bee}
+      <Image source={require('../assets/DB-Welcome.png')} style={styles.bee} />
+
+      <FlatList
+        data={notes}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={{ paddingTop: 180, paddingBottom: 100 }}
       />
 
       <TouchableOpacity style={styles.addButton} onPress={handleAddPress}>
         <Text style={styles.addButtonText}>+</Text>
       </TouchableOpacity>
 
-      {/* Modal Pop-Up */}
+      {/* Modal Input */}
       <Modal
         animationType="fade"
         transparent={true}
@@ -54,7 +78,6 @@ export default function Lobby({ navigation }) {
               style={styles.input}
               placeholderTextColor="#888"
             />
-
             <View style={styles.buttonRow}>
               <TouchableOpacity style={styles.modalButton} onPress={handleCancel}>
                 <Text style={styles.modalButtonText}>Kembali</Text>
@@ -111,7 +134,7 @@ const styles = StyleSheet.create({
   },
   modalBackground: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.3)', // transparan background
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -151,6 +174,17 @@ const styles = StyleSheet.create({
   },
   modalButtonText: {
     color: '#5F7161',
+    fontWeight: 'bold',
+  },
+  noteCard: {
+    backgroundColor: '#A0D995',
+    padding: 15,
+    borderRadius: 12,
+    marginBottom: 10,
+  },
+  noteTitle: {
+    fontSize: 16,
+    color: '#7E5C5C',
     fontWeight: 'bold',
   },
 });
