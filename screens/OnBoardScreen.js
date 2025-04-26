@@ -1,7 +1,11 @@
 import React, { useRef, useState } from 'react';
 import { View, FlatList, StyleSheet, Dimensions } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import OnBoard from './onBoard';
 import OnBoard2 from './onBoard2';
+import OnBoard3 from './onBoard3';
+import OnBoard4 from './onBoard4';
+import OnBoard5 from './onBoard5';
 
 const { width } = Dimensions.get('window');
 
@@ -9,7 +13,7 @@ export default function OnBoardScreen() {
   const flatListRef = useRef();
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const pages = [<OnBoard />, <OnBoard2 />];
+  const pages = [<OnBoard />, <OnBoard2 />, <OnBoard3 />, <OnBoard4 />, <OnBoard5 />];
 
   const handleScroll = (event) => {
     const index = Math.round(event.nativeEvent.contentOffset.x / width);
