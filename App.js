@@ -2,17 +2,28 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, Image, TouchableOpacity } from 'react-native';
-import OnBoardScreen from './screens/OnBoardScreen'; // Ganti dari OnBoard
-// Pastikan kamu sudah punya file OnBoardScreen.js seperti yang sebelumnya aku kasih
+
+// Import screens
+import OnBoardScreen from './screens/OnBoardScreen';
+import Lobby from './screens/Lobby';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{ headerShown: false }}
+      >
+        {/* Tampilan awal saat buka aplikasi */}
         <Stack.Screen name="Home" component={DoneBeeScreen} />
+        
+        {/* Onboarding screen */}
         <Stack.Screen name="OnBoard" component={OnBoardScreen} />
+
+        {/* Setelah onboarding selesai, user masuk ke Lobby */}
+        <Stack.Screen name="Lobby" component={Lobby} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -21,8 +32,9 @@ export default function App() {
 function DoneBeeScreen({ navigation }) {
   return (
     <View style={styles.container}>
+      {/* Tekan gambar untuk masuk ke OnBoarding */}
       <TouchableOpacity onPress={() => navigation.navigate('OnBoard')}>
-        <Image source={require("./assets/DoneBee.png")} style={styles.img} />
+        <Image source={require('./assets/DoneBee.png')} style={styles.img} />
       </TouchableOpacity>
       <StatusBar style="auto" />
     </View>

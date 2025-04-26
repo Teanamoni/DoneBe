@@ -1,11 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-export default function OnBoard5({ navigation }) {
-  const handleStart = () => {
-    // Navigasi ke halaman berikutnya, misal ke "Home"
-    navigation.navigate('Home'); // Ganti 'Home' dengan nama screen tujuan kamu
-  };
+export default function OnBoard5() {
+  const navigation = useNavigation(); // <== fix ReferenceError
 
   return (
     <View style={styles.container}>
@@ -15,7 +13,11 @@ export default function OnBoard5({ navigation }) {
       <Text style={styles.subtitle}>Tap below to start your DoneBe journey.</Text>
 
       <View style={styles.buttonContainer}>
-        <Button title="Start" onPress={handleStart} color="#34A853" />
+        <Button
+          title="Start"
+          onPress={() => navigation.navigate('Lobby')}
+          color="#34A853"
+        />
       </View>
     </View>
   );
@@ -34,7 +36,7 @@ const styles = StyleSheet.create({
     height: 350,
     resizeMode: 'contain',
     marginBottom: 10,
-    marginTop: 15
+    marginTop: 15,
   },
   title: {
     fontSize: 25,
@@ -53,6 +55,5 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingHorizontal: 10,
     height: 48,
-
-  }
+  },
 });
